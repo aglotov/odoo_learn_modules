@@ -1,18 +1,34 @@
 <odoo>
   <data>
     <!-- explicit list view definition -->
-    <record model="ir.ui.view" id="openacademy.list">
+    <record model="ir.ui.view" id="openacademy_course_list">
       <field name="name">Openacademy list</field>
       <field name="model">openacademy.course</field>
       <field name="arch" type="xml">
         <tree string="Courses List">
           <field name="title"/>
           <field name="description"/>
+          <field name="responsible"/>
         </tree>
       </field>
     </record>
 
-    <record id="openacademy_form" model="ir.ui.view">
+    <record id="openacademy_session_list" model="ir.ui.view">
+      <field name="name">Sessions List</field>
+      <field name="model">openacademy.session</field>
+      <field name="arch" type="xml">
+          <tree string="Sessions List">
+              <field name="name"/>
+              <field name="start_date"/>
+              <field name="duration"/>
+              <field name="number_seats"/>
+              <field name="instructor"/>
+              <field name="course"/>
+          </tree>
+      </field>
+    </record>
+
+    <record id="openacademy_course_form" model="ir.ui.view">
         <field name="name">OpenAcademy Course</field>
         <field name="model">openacademy.course</field>
         <field name="arch" type="xml">
@@ -25,32 +41,35 @@
                     <notebook colspan="4">
                         <page string="Description">
                             <field name="description" placeholder="Course description..." />
+                            <label for="responsible" string="Responsible"/> <field name="responsible" />
                         </page>
                     </notebook>
-                  <!--
-                    <separator string="General" colspan="2" />
-                    <group colspan="2" col="2">
-                        <field name="description" placeholder="Course description..." />
-                    </group>
-                    <group>
-                        <separator string="Title"/>
-                        <field name="title"/>
-                    </group>
-                    <group>
-                        <separator string="Description"/>
-                        <field name="description"/>
-                    </group>
-                    -->
                 </sheet>
             </form>
         </field>
     </record>
 
+    <record id="openacademy_course_search" model="ir.ui.view">
+       <field name="name">Courses search</field>
+       <field name="model">openacademy.course</field>
+        <field name="arch" type="xml">
+            <search string="">
+              <field name="title" />
+              <field name="description" />
+            </search>
+       </field>
+    </record>
+
     <!-- actions opening views on models -->
     <record model="ir.actions.act_window" id="openacademy_list_courses">
-      <field name="name">Openacademy</field>
+      <field name="name">Courses</field>
       <field name="res_model">openacademy.course</field>
       <field name="view_mode">tree,form</field>
+    </record>
+    <record id="openacademy_list_sessions" model="ir.actions.act_window">
+        <field name="name">Sessions</field>
+        <field name="res_model">openacademy.session</field>
+        <field name="view_mode">tree,form</field>
     </record>
 
     <!-- server action to the one above -->
@@ -70,8 +89,13 @@
 -->
 
     <!-- Top menu item -->
-    <menuitem name="Openacademy" id="openacademy.menu_root" sequence="10" action="openacademy_list_courses"/>
+    <menuitem name="Open Academy" id="openacademy.menu_root" sequence="10"/>
     <!-- menu categories -->
+      <!-- This Menu Item must have a parent and an action -->
+      <menuitem id="openacademy_courses_action" name="Courses" parent="openacademy.menu_root"
+                action="openacademy_list_courses" sequence="20"/>
+      <menuitem id="openacademy_session_action" name="Sessions" parent="openacademy.menu_root"
+                action="openacademy_list_sessions" sequence="30"/>
 <!--
     <menuitem name="Menu 1" id="openacademy.menu_1" parent="openacademy.menu_root"/>
     <menuitem name="Menu 2" id="openacademy.menu_2" parent="openacademy.menu_root"/>

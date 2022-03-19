@@ -6,7 +6,7 @@
         Open Academy""",
 
     'description': """
-        Open Academy module. The best module
+        Open Academy module
     """,
 
     'author': "Oleksandr Glotov",
