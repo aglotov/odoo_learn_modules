@@ -9,7 +9,8 @@ class Course(models.Model):
 
     title = fields.Char(string="Title", required=True, )
     description = fields.Text(string="Description")
-    responsible = fields.Many2one(comodel_name="res.users", string="Responsible", required=False, )
+    responsible_id = fields.Many2one(comodel_name="res.users", string="Responsible", required=False, )
+    session_id = fields.Many2one(comodel_name="openacademy.session", string="Session", required=False, )
 
 #     @api.depends('value')
 #     def _value_pc(self):

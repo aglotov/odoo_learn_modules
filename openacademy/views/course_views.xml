@@ -8,7 +8,7 @@
         <tree string="Courses List">
           <field name="title"/>
           <field name="description"/>
-          <field name="responsible"/>
+          <field name="responsible_id"/>
         </tree>
       </field>
     </record>
@@ -22,8 +22,8 @@
               <field name="start_date"/>
               <field name="duration"/>
               <field name="number_seats"/>
-              <field name="instructor"/>
-              <field name="course"/>
+              <field name="instructor_id"/>
+              <field name="course_id"/>
           </tree>
       </field>
     </record>
@@ -38,10 +38,14 @@
                         <label for="title" string="Title" />
                         <h1><field name="title" /></h1>
                     </div>
+                    <div>
+                        <label for="session_id" string="Session" />
+                        <field name="session_id" />
+                    </div>
                     <notebook colspan="4">
                         <page string="Description">
                             <field name="description" placeholder="Course description..." />
-                            <label for="responsible" string="Responsible"/> <field name="responsible" />
+                            <label for="responsible_id" string="Responsible"/> <field name="responsible_id" />
                         </page>
                     </notebook>
                 </sheet>
