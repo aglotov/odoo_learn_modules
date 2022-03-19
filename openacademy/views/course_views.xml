@@ -1,0 +1,87 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="openacademy.list">
+      <field name="name">Openacademy list</field>
+      <field name="model">openacademy.course</field>
+      <field name="arch" type="xml">
+        <tree string="Courses List">
+          <field name="title"/>
+          <field name="description"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="openacademy_form" model="ir.ui.view">
+        <field name="name">OpenAcademy Course</field>
+        <field name="model">openacademy.course</field>
+        <field name="arch" type="xml">
+            <form string="Course">
+                <sheet>
+                    <div>
+                        <label for="title" string="Title" />
+                        <h1><field name="title" /></h1>
+                    </div>
+                    <notebook colspan="4">
+                        <page string="Description">
+                            <field name="description" placeholder="Course description..." />
+                        </page>
+                    </notebook>
+                  <!--
+                    <separator string="General" colspan="2" />
+                    <group colspan="2" col="2">
+                        <field name="description" placeholder="Course description..." />
+                    </group>
+                    <group>
+                        <separator string="Title"/>
+                        <field name="title"/>
+                    </group>
+                    <group>
+                        <separator string="Description"/>
+                        <field name="description"/>
+                    </group>
+                    -->
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="openacademy_list_courses">
+      <field name="name">Openacademy</field>
+      <field name="res_model">openacademy.course</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="openacademy.action_server">
+      <field name="name">openacademy server</field>
+      <field name="model_id" ref="model_openacademy_openacademy"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+    <menuitem name="Openacademy" id="openacademy.menu_root" sequence="10" action="openacademy_list_courses"/>
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="openacademy.menu_1" parent="openacademy.menu_root"/>
+    <menuitem name="Menu 2" id="openacademy.menu_2" parent="openacademy.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="openacademy.menu_1_list" parent="openacademy.menu_1"
+              action="openacademy.action_window"/>
+    <menuitem name="Server to list" id="openacademy" parent="openacademy.menu_2"
+              action="openacademy.action_server"/>
+-->
+  </data>
+</odoo>
