@@ -12,3 +12,4 @@ class Session(models.Model):
     instructor_id = fields.Many2one(comodel_name="res.partner", string="Instructor", required=False, )
     course_id = fields.One2many(comodel_name="openacademy.course", inverse_name="session_id",
                                 string="Course", required=False, )
+    attendees_ids = fields.Many2many(comodel_name="res.partner", string="Attendees", )

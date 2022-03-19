@@ -53,6 +53,26 @@
         </field>
     </record>
 
+    <record id="openacademy_session_form" model="ir.ui.view">
+      <field name="name">Session</field>
+      <field name="model">openacademy.session</field>
+      <field name="arch" type="xml">
+          <form string="">
+              <sheet>
+                  <group>
+                      <field name="name"/>
+                      <field name="start_date"/>
+                      <field name="duration"/>
+                      <field name="number_seats"/>
+                      <field name="instructor_id"/>
+                      <field name="course_id"/>
+                      <field name="attendees_ids"/>
+                  </group>
+              </sheet>
+          </form>
+      </field>
+    </record>
+
     <record id="openacademy_course_search" model="ir.ui.view">
        <field name="name">Courses search</field>
        <field name="model">openacademy.course</field>
