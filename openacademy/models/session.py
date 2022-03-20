@@ -1,5 +1,5 @@
 from odoo import models, fields, api
-
+from odoo.exceptions import ValidationError
 
 class Session(models.Model):
     _name = 'openacademy.session'
@@ -47,7 +47,18 @@ class Session(models.Model):
             if count > self.number_seats:
                 return {
                     'warning': {
-                        'title': "Too crowded",
+                        'title': "It is too crowded",
                         'message': "The number of seats smaller then number of attendees"
                     }
                 }
+
+    @api.constrains('instructor_id')
+    def _check_instructor(self):
+        for rec in self:
+            not_presented = True
+            for line in rec.attendees_ids:
+                if line == rec.instructor_id:
+                    not_presented = False
+            if not_presented:
+                raise ValidationError("Instructor %s is not present in the attendees of his/her own session"
+                                      % rec.instructor_id.name)
