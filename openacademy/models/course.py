@@ -17,6 +17,11 @@ class Course(models.Model):
         ('title_notequal_descr', 'check (title <> description)', "Title and description should be different !"),
     ]
 
+    @api.depends('title')
+    def _compute_display_name(self):
+        for rec in self:
+            rec.display_name = rec.title
+
     @api.returns('self', lambda value: value.id)
     def copy(self, default=None):
         self.ensure_one()

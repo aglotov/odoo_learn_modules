@@ -22,10 +22,11 @@ class Session(models.Model):
                                 string="Course", required=True, )
     attendees_ids = fields.Many2many(comodel_name="res.partner", relation="session_ids",
                                      string="Attendees", )
-    percentage_taken_seats = fields.Integer(string="% taken seats", compute="_compute_taken_seats")
+    taken_seats = fields.Integer(string="Taken seats", compute="_compute_taken_seats", store="True")
+    percentage_taken_seats = fields.Integer(string="% taken seats", compute="_compute_taken_seats_percentage")
 
     @api.depends('number_seats', 'attendees_ids')
-    def _compute_taken_seats(self):
+    def _compute_taken_seats_percentage(self):
         for record in self:
             if record.number_seats == 0:
                 record.percentage_taken_seats = 0
@@ -34,6 +35,14 @@ class Session(models.Model):
                 for i in record.attendees_ids:
                     count += 1
                 record.percentage_taken_seats = count / record.number_seats * 100
+
+    @api.depends('attendees_ids')
+    def _compute_taken_seats(self):
+        for record in self:
+            count = 0
+            for i in record.attendees_ids:
+                count += 1
+            record.taken_seats = count
 
     @api.depends('start_date')
     def _compute_lasting_days(self):
