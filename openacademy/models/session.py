@@ -30,3 +30,24 @@ class Session(models.Model):
                 for i in record.attendees_ids:
                     count += 1
                 record.percentage_taken_seats = count / record.number_seats * 100
+
+    @api.onchange('number_seats', 'attendees_ids')
+    def _onchange_seats(self):
+        if self.number_seats < 0:
+            return {
+                'warning': {
+                    'title': "Wrong value",
+                    'message': "The number of seats should be positive"
+                }
+            }
+        else:
+            count = 0
+            for line in self.attendees_ids:
+                count += 1
+            if count > self.number_seats:
+                return {
+                    'warning': {
+                        'title': "Too crowded",
+                        'message': "The number of seats smaller then number of attendees"
+                    }
+                }
