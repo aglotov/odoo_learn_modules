@@ -31,6 +31,19 @@
       </field>
     </record>
 
+    <record id="openacademy_session_calendar" model="ir.ui.view">
+      <field name="name">Sessions Calendar</field>
+      <field name="model">openacademy.session</field>
+      <field name="arch" type="xml">
+          <calendar string="Sessions" date_start="start_date" color="course_id" date_delay="duration">
+              <field name="name"/>
+              <field name="instructor_id"/>
+              <field name="course_id"/>
+              <field name="percentage_taken_seats" widget="progressbar"/>
+          </calendar>
+      </field>
+    </record>
+
     <record id="openacademy_course_form" model="ir.ui.view">
         <field name="name">OpenAcademy Course</field>
         <field name="model">openacademy.course</field>
@@ -116,7 +129,7 @@
     <record id="openacademy_list_sessions" model="ir.actions.act_window">
         <field name="name">Sessions</field>
         <field name="res_model">openacademy.session</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,calendar,form</field>
     </record>
     <record id="openacademy_list_partners" model="ir.actions.act_window">
         <field name="name">Partners</field>
