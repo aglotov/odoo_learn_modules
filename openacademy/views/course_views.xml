@@ -65,6 +65,27 @@
       </field>
     </record>
 
+    <record id="openacademy_session_kanban" model="ir.ui.view">
+      <field name="name">Sessions Kanban</field>
+      <field name="model">openacademy.session</field>
+      <field name="arch" type="xml">
+        <kanban class="o_kanban_mobile" sample="1" default_group_by="course_id" >
+            <templates>
+                <t t-name="kanban-box">
+                    <div class="oe_kanban_global_click">
+                        <div>
+                            <strong><field name="name"/></strong>
+                        </div>
+                        <div>
+                            <span><field name="instructor_id"/>&amp;nbsp;</span>
+                        </div>
+                    </div>
+                </t>
+            </templates>
+        </kanban>
+      </field>
+    </record>
+
     <record id="openacademy_course_form" model="ir.ui.view">
         <field name="name">OpenAcademy Course</field>
         <field name="model">openacademy.course</field>
@@ -156,7 +177,7 @@
     <record id="openacademy_list_sessions" model="ir.actions.act_window">
         <field name="name">Sessions</field>
         <field name="res_model">openacademy.session</field>
-        <field name="view_mode">tree,calendar,graph,gantt,form</field>
+        <field name="view_mode">tree,calendar,graph,gantt,kanban,form</field>
     </record>
     <record id="openacademy_list_partners" model="ir.actions.act_window">
         <field name="name">Partners</field>
