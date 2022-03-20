@@ -14,7 +14,7 @@ class Session(models.Model):
                                     domain="['|', "
                                            "('instructor', '=', 'True'), "
                                            "('category_id.name', '=like', 'Teacher /%')]")
-    course_id = fields.One2many(comodel_name="openacademy.course", inverse_name="session_id",
+    course_id = fields.Many2one(comodel_name="openacademy.course", inverse_name="session_ids",
                                 string="Course", required=False, )
     attendees_ids = fields.Many2many(comodel_name="res.partner", relation="session_ids",
                                      string="Attendees", )
