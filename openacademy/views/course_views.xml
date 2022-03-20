@@ -17,7 +17,8 @@
       <field name="name">Sessions List</field>
       <field name="model">openacademy.session</field>
       <field name="arch" type="xml">
-          <tree string="Sessions List">
+          <tree string="Sessions List" decoration-info="lasting_days &gt; 0 and lasting_days &lt;= 5"
+                decoration-danger="lasting_days &gt; 15">
               <field name="name"/>
               <field name="start_date"/>
               <field name="duration"/>
@@ -25,6 +26,7 @@
               <field name="instructor_id"/>
               <field name="course_id"/>
               <field name="percentage_taken_seats" widget="progressbar"/>
+              <field name="lasting_days" invisible="True"/>
           </tree>
       </field>
     </record>

@@ -7,6 +7,8 @@ class Session(models.Model):
 
     name = fields.Char(string="Name", required=True)
     start_date = fields.Date(string="Start date", required=True, default=fields.Date.today())
+    lasting_days = fields.Integer(compute="_compute_lasting_days")
+
     is_active = fields.Boolean(string="Active", default=True)
     duration = fields.Integer(string="Duration", required=False, )
     number_seats = fields.Integer(string="Number of seats", required=False, )
@@ -15,7 +17,7 @@ class Session(models.Model):
                                            "('instructor', '=', 'True'), "
                                            "('category_id.name', '=like', 'Teacher /%')]")
     course_id = fields.Many2one(comodel_name="openacademy.course", inverse_name="session_ids",
-                                string="Course", required=False, )
+                                string="Course", required=True, )
     attendees_ids = fields.Many2many(comodel_name="res.partner", relation="session_ids",
                                      string="Attendees", )
     percentage_taken_seats = fields.Integer(string="% taken seats", compute="_compute_taken_seats")
@@ -30,6 +32,15 @@ class Session(models.Model):
                 for i in record.attendees_ids:
                     count += 1
                 record.percentage_taken_seats = count / record.number_seats * 100
+
+    @api.depends('start_date')
+    def _compute_lasting_days(self):
+        for rec in self:
+            lasting_days = (fields.Date.today() - rec.start_date).days
+            if lasting_days > 0:
+                rec.lasting_days = lasting_days
+            else:
+                rec.lasting_days = 0
 
     @api.onchange('number_seats', 'attendees_ids')
     def _onchange_seats(self):
