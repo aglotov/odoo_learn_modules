@@ -64,7 +64,7 @@
                       <field name="start_date"/>
                       <field name="duration"/>
                       <field name="number_seats"/>
-                      <field name="instructor_id"/>
+                      <field name="instructor_id" />
                       <field name="course_id"/>
                       <field name="attendees_ids"/>
                   </group>
@@ -114,6 +114,11 @@
         <field name="res_model">openacademy.session</field>
         <field name="view_mode">tree,form</field>
     </record>
+    <record id="openacademy_list_partners" model="ir.actions.act_window">
+        <field name="name">Partners</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+    </record>
 
     <!-- server action to the one above -->
 <!--
@@ -139,6 +144,8 @@
                 action="openacademy_list_courses" sequence="20"/>
       <menuitem id="openacademy_session_action" name="Sessions" parent="openacademy.menu_root"
                 action="openacademy_list_sessions" sequence="30"/>
+      <menuitem id="openacademy_partner_action" name="Partners" parent="openacademy.menu_root"
+                action="openacademy_list_partners" sequence="40"/>
 <!--
     <menuitem name="Menu 1" id="openacademy.menu_1" parent="openacademy.menu_root"/>
     <menuitem name="Menu 2" id="openacademy.menu_2" parent="openacademy.menu_root"/>

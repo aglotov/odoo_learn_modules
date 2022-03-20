@@ -9,7 +9,10 @@ class Session(models.Model):
     start_date = fields.Date(string="Start date", required=True, )
     duration = fields.Integer(string="Duration", required=False, )
     number_seats = fields.Integer(string="Number of seats", required=False, )
-    instructor_id = fields.Many2one(comodel_name="res.partner", string="Instructor", required=False, )
+    instructor_id = fields.Many2one(comodel_name="res.partner", string="Instructor", required=False,
+                                    domain="['|', "
+                                           "('instructor', '=', 'True'), "
+                                           "('category_id.name', '=like', 'Teacher /%')]")
     course_id = fields.One2many(comodel_name="openacademy.course", inverse_name="session_id",
                                 string="Course", required=False, )
     attendees_ids = fields.Many2many(comodel_name="res.partner", relation="session_ids",
