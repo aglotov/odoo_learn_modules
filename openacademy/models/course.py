@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields
+from odoo import models, fields, api
 
 
 class Course(models.Model):
@@ -16,7 +16,10 @@ class Course(models.Model):
         ('title_notequal_descr', 'check (title <> description)', "Title and description should be different !"),
     ]
 
-#     @api.depends('value')
-#     def _value_pc(self):
-#         for record in self:
-#             record.value2 = float(record.value) / 100
+    @api.returns('self', lambda value: value.id)
+    def copy(self, default=None):
+        self.ensure_one()
+        default = dict(default or {})
+        if 'title' not in default:
+            default['title'] = "Copy of %s" % self.title
+        return super(Course, self).copy(default=default)
