@@ -24,6 +24,7 @@
               <field name="number_seats"/>
               <field name="instructor_id"/>
               <field name="course_id"/>
+              <field name="percentage_taken_seats" widget="progressbar"/>
           </tree>
       </field>
     </record>
@@ -67,6 +68,7 @@
                       <field name="instructor_id" />
                       <field name="course_id"/>
                       <field name="attendees_ids"/>
+                      <field name="percentage_taken_seats" widget="progresbar"/>
                   </group>
               </sheet>
           </form>

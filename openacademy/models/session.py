@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields, api
 
 
 class Session(models.Model):
@@ -17,3 +17,15 @@ class Session(models.Model):
                                 string="Course", required=False, )
     attendees_ids = fields.Many2many(comodel_name="res.partner", relation="session_ids",
                                      string="Attendees", )
+    percentage_taken_seats = fields.Integer(string="% taken seats", compute="_compute_taken_seats")
+
+    @api.depends('number_seats', 'attendees_ids')
+    def _compute_taken_seats(self):
+        for record in self:
+            if record.number_seats == 0:
+                record.percentage_taken_seats = 0
+            else:
+                count = 0
+                for i in record.attendees_ids:
+                    count += 1
+                record.percentage_taken_seats = count / record.number_seats * 100
