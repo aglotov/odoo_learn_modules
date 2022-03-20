@@ -1,5 +1,6 @@
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
+import datetime
 
 class Session(models.Model):
     _name = 'openacademy.session'
@@ -11,6 +12,7 @@ class Session(models.Model):
 
     is_active = fields.Boolean(string="Active", default=True)
     duration = fields.Integer(string="Duration", required=False, )
+    finish_date = fields.Date(string="Finish date", compute="_compute_finish_date", store="True")
     number_seats = fields.Integer(string="Number of seats", required=False, )
     instructor_id = fields.Many2one(comodel_name="res.partner", string="Instructor", required=False,
                                     domain="['|', "
@@ -41,6 +43,11 @@ class Session(models.Model):
                 rec.lasting_days = lasting_days
             else:
                 rec.lasting_days = 0
+
+    @api.depends('start_date', 'duration')
+    def _compute_finish_date(self):
+        for rec in self:
+            rec.finish_date = rec.start_date + datetime.timedelta(days=rec.duration)
 
     @api.onchange('number_seats', 'attendees_ids')
     def _onchange_seats(self):
