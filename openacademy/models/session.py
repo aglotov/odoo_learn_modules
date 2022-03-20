@@ -6,7 +6,8 @@ class Session(models.Model):
     _description = 'A session is an occurrence of a course taught at a given time for a given audience'
 
     name = fields.Char(string="Name", required=True)
-    start_date = fields.Date(string="Start date", required=True, )
+    start_date = fields.Date(string="Start date", required=True, default=fields.Date.today())
+    is_active = fields.Boolean(string="Active", default=True)
     duration = fields.Integer(string="Duration", required=False, )
     number_seats = fields.Integer(string="Number of seats", required=False, )
     instructor_id = fields.Many2one(comodel_name="res.partner", string="Instructor", required=False,
