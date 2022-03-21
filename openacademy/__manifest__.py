@@ -20,13 +20,14 @@
 
     # any module necessary for this one to work correctly
     'depends': ['base'],
+    'application': True,
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/openacademy_security.xml',
+        'security/ir.model.access.csv',
         'views/course_views.xml',
-        'views/templates.xml',
-        'data/course_data.xml'
+        'data/course_data.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
