@@ -2,6 +2,7 @@ from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 import datetime
 
+
 class Session(models.Model):
     _name = 'openacademy.session'
     _description = 'A session is an occurrence of a course taught at a given time for a given audience'
@@ -89,3 +90,7 @@ class Session(models.Model):
             if not_presented:
                 raise ValidationError("Instructor %s is not present in the attendees of his/her own session"
                                       % rec.instructor_id.name)
+
+    def action_fill_attendees(self, attendees_ids):
+        self.attendees_ids = attendees_ids
+

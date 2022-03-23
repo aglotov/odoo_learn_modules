@@ -27,6 +27,7 @@
         'security/openacademy_security.xml',
         'security/ir.model.access.csv',
         'views/course_views.xml',
+        'wizard/create_session_view.xml',
         'data/course_data.xml',
     ],
     # only loaded in demonstration mode

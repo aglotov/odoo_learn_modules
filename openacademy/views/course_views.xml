@@ -179,6 +179,13 @@
         <field name="res_model">openacademy.session</field>
         <field name="view_mode">tree,calendar,graph,gantt,kanban,form</field>
     </record>
+    <record id="action_openacademy_session_fill" model="ir.actions.act_window">
+        <field name="name">Session Fill Wizard</field>
+        <field name="res_model">fill.session.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_openacademy_session"/>
+    </record>
     <record id="openacademy_list_partners" model="ir.actions.act_window">
         <field name="name">Partners</field>
         <field name="res_model">res.partner</field>
