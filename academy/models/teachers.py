@@ -6,3 +6,4 @@ class Teachers(models.Model):
     _description = 'Teachers'
 
     name = fields.Char()
+    biography = fields.Html()
