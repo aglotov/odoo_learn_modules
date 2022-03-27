@@ -24,6 +24,7 @@
     # always loaded
     'data': [
         'views/layout.xml',
+        'views/pages.xml',
     ],
     'assets': {
         'web.assets_common': {
