@@ -24,13 +24,17 @@
 
     # always loaded
     'data': [
-        'security/openacademy_security.xml',
+        'security/openacademy_groups.xml',
+        'security/course_security.xml',
         'security/ir.model.access.csv',
+        'views/openacademy_menus.xml',
         'views/course_views.xml',
+        'views/session_views.xml',
+        'views/partner_views.xml',
         'report/session_report.xml',
-        'report/report_session.xml',
+        'report/session_templates.xml',
         'views/dashboard.xml',
-        'wizard/create_session_view.xml',
+        'wizard/fill_session_views.xml',
         'data/course_data.xml',
     ],
     # only loaded in demonstration mode

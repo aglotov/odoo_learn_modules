@@ -2,15 +2,6 @@
 <odoo>
     <data>
 
-        <record id="openacademy_module_category" model="ir.module.category">
-            <field name="name">OpenAcademy</field>
-            <field name="sequence" eval="1"/>
-        </record>
-        <record id="openacademy_manager" model="res.groups">
-            <field name="name">Manager</field>
-            <field name="category_id" ref="openacademy_module_category"/>
-            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
-        </record>
         <record id="openacademy_rule_responsible_write_restrict" model="ir.rule">
             <field name="name">Write restrict for responsible</field>
             <field ref="model_openacademy_course" name="model_id"/>
