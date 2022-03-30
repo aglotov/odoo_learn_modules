@@ -26,6 +26,7 @@
         'views/layout.xml',
         'views/pages.xml',
         'views/snippets.xml',
+        'views/options.xml',
     ],
     'assets': {
         'web.assets_common': {
@@ -36,6 +37,9 @@
         },
         'web._assets_frontend_helpers': {
             '/theme_tutorial/static/scss/bootstrap_overridden.scss',
+        },
+        'website.assets_editor': {
+            '/theme_tutorial/static/src/js/tutorial_editor.js',
         },
     },
     # only loaded in demonstration mode
