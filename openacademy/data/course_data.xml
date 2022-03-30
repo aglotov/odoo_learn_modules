@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <data>
+    <data noupdate="1">
 
-        <record model="openacademy.course" id="course_base">
+        <record id="course_base" model="openacademy.course">
             <field name="title">Odoo base</field>
             <field name="description">Base odoo course</field>
         </record>
-        <record model="openacademy.course" id="course_odoo_extended">
+        <record id="course_odoo_extended" model="openacademy.course">
             <field name="title">Odoo extended</field>
             <field name="description">Extended course</field>
         </record>
-        <record model="openacademy.course" id="course_odoo_crm">
+        <record id="course_odoo_crm" model="openacademy.course">
             <field name="title">CRM</field>
         </record>
 

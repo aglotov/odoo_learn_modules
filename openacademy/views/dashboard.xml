@@ -5,7 +5,7 @@
         <field name="name">Session Calendar</field>
         <field name="res_model">openacademy.session</field>
         <field name="view_mode">calendar</field>
-        <field name="view_id" ref="openacademy_session_calendar"/>
+        <field name="view_id" ref="openacademy_session_view_calendar"/>
     </record>
     <record id="action_course_list" model="ir.actions.act_window">
         <field name="name">Courses</field>
@@ -16,7 +16,7 @@
         <field name="name">Number of attendees</field>
         <field name="res_model">openacademy.session</field>
         <field name="view_mode">graph</field>
-        <field name="view_id" ref="openacademy_session_graph"/>
+        <field name="view_id" ref="openacademy_session_view_graph"/>
     </record>
 
     <record id="dashboard_form_view" model="ir.ui.view">
@@ -38,7 +38,7 @@
         </field>
     </record>
 
-    <record id="openacademy_dashboard" model="ir.actions.act_window">
+    <record id="openacademy_action_dashboard" model="ir.actions.act_window">
         <field name="name">Dashboard</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">board.board</field>
@@ -48,9 +48,9 @@
 
     <!-- This Menu Item must have a parent and an action -->
     <menuitem
-            id="menu_dashboard"
+            id="openacademy_menu_dashboard"
             name="Dashboard"
-            parent="openacademy.menu_root"
-            action="openacademy_dashboard"
+            parent="openacademy.openacademy_menu_root"
+            action="openacademy_action_dashboard"
             sequence="1"/>
 </odoo>
