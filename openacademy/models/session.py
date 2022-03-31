@@ -32,18 +32,12 @@ class Session(models.Model):
             if record.number_seats == 0:
                 record.percentage_taken_seats = 0
             else:
-                count = 0
-                for i in record.attendees_ids:
-                    count += 1
-                record.percentage_taken_seats = count / record.number_seats * 100
+                record.percentage_taken_seats = len(record.attendees_ids) / record.number_seats * 100
 
     @api.depends('attendees_ids')
     def _compute_taken_seats(self):
         for record in self:
-            count = 0
-            for i in record.attendees_ids:
-                count += 1
-            record.taken_seats = count
+            record.taken_seats = len(record.attendees_ids)
 
     @api.depends('start_date')
     def _compute_lasting_days(self):
@@ -69,10 +63,7 @@ class Session(models.Model):
                 }
             }
         else:
-            count = 0
-            for line in self.attendees_ids:
-                count += 1
-            if count > self.number_seats:
+            if len(self.attendees_ids) > self.number_seats:
                 return {
                     'warning': {
                         'title': "It is too crowded",
@@ -83,11 +74,7 @@ class Session(models.Model):
     @api.constrains('instructor_id')
     def _check_instructor(self):
         for rec in self:
-            not_presented = True
-            for line in rec.attendees_ids:
-                if line == rec.instructor_id:
-                    not_presented = False
-            if not_presented:
+            if rec.instructor_id not in rec.attendees_ids:
                 raise ValidationError("Instructor %s is not present in the attendees of his/her own session"
                                       % rec.instructor_id.name)
 

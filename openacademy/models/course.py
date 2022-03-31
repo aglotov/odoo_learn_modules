@@ -26,6 +26,5 @@ class Course(models.Model):
     def copy(self, default=None):
         self.ensure_one()
         default = dict(default or {})
-        if 'title' not in default:
-            default['title'] = "Copy of %s" % self.title
+        default.setdefault('title', "Copy of %s" % self.title)
         return super(Course, self).copy(default=default)
