@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
+from odoo import api, fields, models, _
 
 
 class Course(models.Model):
@@ -13,8 +13,8 @@ class Course(models.Model):
     session_ids = fields.One2many(comodel_name="openacademy.session", string="Session", required=False,
                                   inverse_name="course_id")
     _sql_constraints = [
-        ('title_uniq', 'unique (title)', "Course title already exists !"),
-        ('title_notequal_descr', 'check (title <> description)', "Title and description should be different !"),
+        ('title_uniq', 'unique (title)', _("Course title already exists !")),
+        ('title_notequal_descr', 'check (title <> description)', _("Title and description should be different !")),
     ]
 
     @api.depends('title')
@@ -26,5 +26,5 @@ class Course(models.Model):
     def copy(self, default=None):
         self.ensure_one()
         default = dict(default or {})
-        default.setdefault('title', "Copy of %s" % self.title)
+        default.setdefault('title', _("Copy of %s", self.title))
         return super(Course, self).copy(default=default)

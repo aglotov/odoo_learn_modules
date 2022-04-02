@@ -2,7 +2,7 @@ from odoo import models, fields, api
 
 
 class FillSession(models.TransientModel):
-    _name = 'fill.session.wizard'
+    _name = 'openacademy.session.fill'
     _description = 'Session fill wizard'
     session_ids = fields.Many2many(comodel_name="openacademy.session", string="Session", )
     attendees_ids = fields.Many2many(comodel_name="res.partner", string="Attendees")

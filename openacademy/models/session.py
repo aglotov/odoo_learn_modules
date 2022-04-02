@@ -1,6 +1,6 @@
-from odoo import models, fields, api
-from odoo.exceptions import ValidationError
 import datetime
+from odoo import api, fields, models, _
+from odoo.exceptions import ValidationError
 
 
 class Session(models.Model):
@@ -24,10 +24,10 @@ class Session(models.Model):
     attendees_ids = fields.Many2many(comodel_name="res.partner", relation="session_ids",
                                      string="Attendees", )
     taken_seats = fields.Integer(string="Taken seats", compute="_compute_taken_seats", store="True")
-    percentage_taken_seats = fields.Integer(string="% taken seats", compute="_compute_taken_seats_percentage")
+    percentage_taken_seats = fields.Integer(string="% taken seats", compute="_compute_percentage_taken_seats")
 
     @api.depends('number_seats', 'attendees_ids')
-    def _compute_taken_seats_percentage(self):
+    def _compute_percentage_taken_seats(self):
         for record in self:
             if record.number_seats == 0:
                 record.percentage_taken_seats = 0
@@ -58,16 +58,16 @@ class Session(models.Model):
         if self.number_seats < 0:
             return {
                 'warning': {
-                    'title': "Wrong value",
-                    'message': "The number of seats should be positive"
+                    'title': _("Wrong value"),
+                    'message': _("The number of seats should be positive")
                 }
             }
         else:
             if len(self.attendees_ids) > self.number_seats:
                 return {
                     'warning': {
-                        'title': "It is too crowded",
-                        'message': "The number of seats smaller then number of attendees"
+                        'title': _("It is too crowded"),
+                        'message': _("The number of seats smaller then number of attendees")
                     }
                 }
 
@@ -75,8 +75,8 @@ class Session(models.Model):
     def _check_instructor(self):
         for rec in self:
             if rec.instructor_id not in rec.attendees_ids:
-                raise ValidationError("Instructor %s is not present in the attendees of his/her own session"
-                                      % rec.instructor_id.name)
+                raise ValidationError(_("Instructor %s is not present in the attendees of his/her own session",
+                                      rec.instructor_id.name))
 
     def action_fill_attendees(self, attendees_ids):
         self.attendees_ids = attendees_ids
